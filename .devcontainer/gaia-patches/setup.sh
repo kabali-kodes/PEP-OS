@@ -17,7 +17,10 @@ cat > /usr/local/bin/build-pep <<'EOF'
 #!/bin/bash
 set -euo pipefail
 cd /workspaces/PEP-OS
-if [[ ! -d "B2G" ]]; then
+if [[ ! -f "B2G/config.sh" ]]; then
+  git submodule update --init B2G
+fi
+if [[ ! -f "B2G/config.sh" ]]; then
   git clone https://github.com/mozilla-b2g/B2G.git B2G
 fi
 cd B2G
@@ -39,13 +42,24 @@ cat > /usr/local/bin/branding-pep <<'EOF'
 #!/bin/bash
 set -euo pipefail
 cd /workspaces/PEP-OS/B2G
-sed -i 's/Firefox OS/PEP OS/g' gaia/build/config/common-settings.json
 printf '%s\n' '{"name":"PEP OS","brand":"PEP OS"}' > gaia/locales/branding.json
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+manifest_path = Path("gaia/apps/homescreen/manifest.webapp")
+manifest = json.loads(manifest_path.read_text())
+manifest["name"] = "PEP OS"
+manifest["description"] = "PEP OS home screen."
+manifest["locales"]["en-US"]["name"] = "PEP OS"
+manifest["locales"]["en-US"]["description"] = "PEP OS Home Screen."
+manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+PY
+sed -i 's/<title>Firefox OS Home Screen/<title>PEP OS/' gaia/apps/homescreen/index.html
 install -m 0644 /workspaces/PEP-OS/.devcontainer/gaia-patches/apk_installer.js gaia/apps/system/js/apk_installer.js
 if ! grep -q apk_installer gaia/apps/system/index.html; then
   sed -i 's|</head>|<script defer src="js/apk_installer.js"></script></head>|' gaia/apps/system/index.html
 fi
-printf 'PEP OS\n' > gaia/apps/homescreen/name
 EOF
 
 chmod +x /usr/local/bin/build-pep /usr/local/bin/branding-pep

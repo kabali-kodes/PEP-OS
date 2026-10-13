@@ -1,0 +1,4 @@
+[submodule "B2G"]
+	path = B2G
+	url = https://github.com/kabali-kodes/PEP-OS.git
+	branch = b2g-pep
