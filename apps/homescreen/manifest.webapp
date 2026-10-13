@@ -1,6 +1,6 @@
 {
-  "name": "Default Home Screen",
-  "description": "Gaia home screen.",
+  "name": "PEP OS",
+  "description": "PEP OS home screen.",
   "launch_path": "/index.html",
   "type": "privileged",
   "role": "homescreen",
@@ -31,8 +31,8 @@
       "description": "Gaia الشاشة الرئيسية"
     },
     "en-US": {
-      "name": "Default Home Screen",
-      "description": "Gaia Home Screen."
+      "name": "PEP OS",
+      "description": "PEP OS Home Screen."
     },
     "fr": {
       "name": "Écran d’accueil",
