@@ -49,4 +49,3 @@ printf 'PEP OS\n' > gaia/apps/homescreen/name
 EOF
 
 chmod +x /usr/local/bin/build-pep /usr/local/bin/branding-pep
-chmod +x /usr/local/bin/build-pep /usr/local/bin/branding-pep
