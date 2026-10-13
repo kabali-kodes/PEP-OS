@@ -1,0 +1,15 @@
+{
+    "name": "PEP OS Builder",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+    "hostRequirements": {
+        "cpus": 8,
+        "memory": "32gb",
+        "storage": "200gb"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "postCreateCommand": "bash.devcontainer/setup.sh",
+    "remoteUser": "root"
+}
