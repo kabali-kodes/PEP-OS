@@ -373,7 +373,7 @@ def _CheckGitVersion():
            file=sys.stderr)
     raise CloneFailure()
 
-  ver_str = proc.stdout.read().strip()
+  ver_str = proc.stdout.read().decode('utf-8').strip()
   proc.stdout.close()
   proc.wait()
 
@@ -438,7 +438,7 @@ def SetupGnuPG(quiet):
       _print(file=sys.stderr)
     return False
 
-  proc.stdin.write(MAINTAINER_KEYS)
+  proc.stdin.write(MAINTAINER_KEYS.encode('utf-8'))
   proc.stdin.close()
 
   if proc.wait() != 0:

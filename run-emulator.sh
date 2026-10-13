@@ -71,4 +71,5 @@ ${DBG_CMD} $EMULATOR \
    -gpu on \
    -camera-back webcam0 \
    $emu_extra_args \
+    "$@" \
    -qemu $TAIL_ARGS
